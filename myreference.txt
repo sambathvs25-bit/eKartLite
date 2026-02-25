@@ -1,0 +1,230 @@
+
+• Run & test checklist:
+
+  1. Start infra:
+
+  docker compose up -d mysql redis
+
+  2. Build once:
+
+  mvn -s mvn-settings.xml clean compile -DskipTests
+
+  3. Start all services (new terminal):
+
+  powershell -ExecutionPolicy Bypass -File .\scripts\start-all.ps1 -SkipBuild
+
+  4. Check health (new terminal):
+
+  curl http://localhost:8080/actuator/health
+  curl http://localhost:8081/actuator/health
+  curl http://localhost:8082/actuator/health
+  curl http://localhost:8083/actuator/health
+  curl http://localhost:8084/actuator/health
+  curl http://localhost:8085/actuator/health
+  curl http://localhost:8086/actuator/health
+  curl http://localhost:8087/actuator/health
+
+  5. Quick API test:
+
+  - Register customer: POST /auth/register
+  - Register agent: POST /auth/register-agent
+  - Login both: POST /auth/login
+  - Add product (agent token): POST /agent/products
+  - Search (customer token): GET /customer/products/search
+  - Add cart item: POST /customer/cart/items
+  - Create order: POST /customer/orders
+  - Pay order: POST /customer/orders/{id}/pay
+  - Check shipping orders (agent): GET /agent/orders/ready-for-shipping
+
+  6. Stop all:
+
+  powershell -ExecutionPolicy Bypass -File .\scripts\stop-all.ps1
+  docker compose down
+
+  If any step fails, share that command + error and I’ll fix immediately.
+  
+  
+  • Use base URL: http://localhost:8080
+
+  1. Customer Register
+     POST http://localhost:8080/auth/register
+
+  {
+    "name": "Rahul Sharma",
+    "email": "rahul@mail.com",
+    "password": "rahul123",
+    "mobileNumber": "9999999999"
+  }
+
+  2. Agent Register
+     POST http://localhost:8080/auth/register-agent
+
+  {
+    "name": "Agent One",
+    "email": "agent1@mail.com",
+    "password": "agent123"
+  }
+
+  3. Login (Customer)
+     POST http://localhost:8080/auth/login
+
+  {
+    "email": "rahul@mail.com",
+    "password": "rahul123"
+  }
+
+  4. Login (Agent)
+     POST http://localhost:8080/auth/login
+
+  {
+    "email": "agent1@mail.com",
+    "password": "agent123"
+  }
+
+  5. Add Product (Agent token)
+     POST http://localhost:8080/agent/products
+     Headers: Authorization: Bearer <AGENT_TOKEN>
+
+  {
+    "name": "Laptop Pro 15",
+    "description": "16GB RAM, 512GB SSD",
+    "price": 75000,
+    "quantity": 10,
+    "category": "Electronics",
+    "status": "ACTIVE"
+  }
+
+  6. Update Product Price
+     PUT http://localhost:8080/agent/products/1/price
+     Headers: Authorization: Bearer <AGENT_TOKEN>
+
+  {
+    "price": 72000
+  }
+
+  7. Update Product Quantity
+     PUT http://localhost:8080/agent/products/1/quantity
+     Headers: Authorization: Bearer <AGENT_TOKEN>
+
+  {
+    "quantity": 25
+  }
+
+  8. Search Products (Customer token)
+     GET http://localhost:8080/customer/products/search?name=laptop&category=electronics
+     Headers: Authorization: Bearer <CUSTOMER_TOKEN>
+  9. Native Search (Mandatory SQL endpoint)
+     GET http://localhost:8080/customer/products/native-search?maxPrice=80000
+     Headers: Authorization: Bearer <CUSTOMER_TOKEN>
+  10. Add to Cart
+     POST http://localhost:8080/customer/cart/items
+     Headers: Authorization: Bearer <CUSTOMER_TOKEN>
+
+  {
+    "productId": 1,
+    "productName": "Laptop Pro 15",
+    "price": 72000,
+    "quantity": 1
+  }
+
+  11. View Cart
+     GET http://localhost:8080/customer/cart
+     Headers: Authorization: Bearer <CUSTOMER_TOKEN>
+  12. Create Order
+     POST http://localhost:8080/customer/orders
+     Headers: Authorization: Bearer <CUSTOMER_TOKEN>
+
+  {
+    "items": [
+      {
+        "productId": 1,
+        "productName": "Laptop Pro 15",
+        "price": 72000,
+        "quantity": 1
+      }
+    ]
+  }
+
+  13. Pay Order
+     POST http://localhost:8080/customer/orders/1/pay
+     Headers: Authorization: Bearer <CUSTOMER_TOKEN>
+
+  {
+    "method": "UPI"
+  }
+
+  14. Customer Order History
+     GET http://localhost:8080/customer/orders
+     Headers: Authorization: Bearer <CUSTOMER_TOKEN>
+  15. Agent Ready For Shipping
+     GET http://localhost:8080/agent/orders/ready-for-shipping
+     Headers: Authorization: Bearer <AGENT_TOKEN>
+  16. Customer Profile
+     GET http://localhost:8080/customer/profile/me
+     Headers: Authorization: Bearer <CUSTOMER_TOKEN>
+  17. Update Mobile
+     PUT http://localhost:8080/customer/profile/mobile
+     Headers: Authorization: Bearer <CUSTOMER_TOKEN>
+
+  {
+    "mobileNumber": "8888888888"
+  }
+
+  18. Trigger Batch Job
+     POST http://localhost:8080/agent/batch/run
+     Headers: Authorization: Bearer <AGENT_TOKEN>
+
+  If you want, I can also provide this as a Postman Collection JSON (import-ready).
+  ----------------------------------------------------
+  
+  
+  • 1. Start infrastructure first
+
+  - Open terminal in project root D:\Ecommerce_project
+  - Run:
+
+  docker compose up -d mysql redis
+
+  2. Import project in Eclipse/STS
+
+  - File -> Import -> Maven -> Existing Maven Projects
+  - Select D:\Ecommerce_project
+  - Ensure all modules are imported (api-gateway, auth-service, customer-service, product-service, cart-service, order-service,
+    payment-service, batch-service)
+
+  3. Enable annotation processing (important)
+
+  - Project -> Properties -> Java Compiler -> Annotation Processing
+  - Check Enable project specific settings and Enable annotation processing
+  - Apply for each module (or all projects)
+
+  4. Update Maven dependencies
+
+  - Right click parent project -> Maven -> Update Project (Alt+F5)
+  - Select all modules and force update
+
+  5. Build once
+
+  - Project -> Clean... then build all
+  - Wait for no compile errors
+
+  6. Run services in this order (Run As -> Spring Boot App)
+  7. auth-service (AuthServiceApplication)
+  8. payment-service (PaymentServiceApplication)
+  9. order-service (OrderServiceApplication)
+  10. product-service (ProductServiceApplication)
+  11. cart-service (CartServiceApplication)
+  12. customer-service (CustomerServiceApplication)
+  13. batch-service (BatchServiceApplication)
+  14. api-gateway (ApiGatewayApplication)
+  15. Verify ports
+
+  - 8081, 8086, 8085, 8083, 8084, 8082, 8087, 8080 should be up
+
+  8. Smoke test
+
+  - Open browser/Postman:
+      - http://localhost:8080/actuator/health
+      - http://localhost:8081/actuator/health
+
+  If any module fails in Eclipse, send the first Caused by: block from Console and I’ll give exact fix.
