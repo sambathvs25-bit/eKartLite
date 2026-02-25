@@ -1,5 +1,10 @@
+
 --my project hello world
 --programmer 1
+
+--my project
+--programmer 2
+
 • Run & test checklist:
 
   1. Start infra:
