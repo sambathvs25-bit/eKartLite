@@ -7,7 +7,7 @@
 
 • Run & test checklist:
 
-  1. Start infra:
+  1. Start infra2:
 
   docker compose up -d mysql redis
 
