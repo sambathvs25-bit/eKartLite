@@ -1,0 +1,12 @@
+[
+    {
+        "name":  "auth-service",
+        "port":  8081,
+        "pid":  10072
+    },
+    {
+        "name":  "batch-service",
+        "port":  8087,
+        "pid":  10072
+    }
+]

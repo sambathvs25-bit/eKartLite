@@ -1,0 +1,10 @@
+com\eflipkartlite\batchservice\entity\OrderStatus.class
+com\eflipkartlite\batchservice\config\SchedulerConfig.class
+com\eflipkartlite\batchservice\dto\MessageResponse.class
+com\eflipkartlite\batchservice\repository\OrderArchiveRepository.class
+com\eflipkartlite\batchservice\service\BatchSchedulerService.class
+com\eflipkartlite\batchservice\entity\OrderArchive.class
+com\eflipkartlite\batchservice\config\BatchJobConfig.class
+com\eflipkartlite\batchservice\config\SecurityConfig.class
+com\eflipkartlite\batchservice\BatchServiceApplication.class
+com\eflipkartlite\batchservice\controller\BatchController.class

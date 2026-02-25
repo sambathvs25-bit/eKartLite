@@ -1,0 +1,14 @@
+server:
+  port: 8086
+
+spring:
+  application:
+    name: payment-service
+  config:
+    import: optional:file:../application-db.yml
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

@@ -1,0 +1,14 @@
+D:\Ecommerce_project\product-service\src\main\java\com\eflipkartlite\productservice\dto\PriceUpdateRequest.java
+D:\Ecommerce_project\product-service\src\main\java\com\eflipkartlite\productservice\dto\ProductResponse.java
+D:\Ecommerce_project\product-service\src\main\java\com\eflipkartlite\productservice\dto\ProductCreateRequest.java
+D:\Ecommerce_project\product-service\src\main\java\com\eflipkartlite\productservice\ProductServiceApplication.java
+D:\Ecommerce_project\product-service\src\main\java\com\eflipkartlite\productservice\entity\Product.java
+D:\Ecommerce_project\product-service\src\main\java\com\eflipkartlite\productservice\dto\QuantityUpdateRequest.java
+D:\Ecommerce_project\product-service\src\main\java\com\eflipkartlite\productservice\repository\ProductRepository.java
+D:\Ecommerce_project\product-service\src\main\java\com\eflipkartlite\productservice\service\ProductService.java
+D:\Ecommerce_project\product-service\src\main\java\com\eflipkartlite\productservice\dto\MessageResponse.java
+D:\Ecommerce_project\product-service\src\main\java\com\eflipkartlite\productservice\controller\ProductController.java
+D:\Ecommerce_project\product-service\src\main\java\com\eflipkartlite\productservice\config\CacheConfig.java
+D:\Ecommerce_project\product-service\src\main\java\com\eflipkartlite\productservice\config\SecurityConfig.java
+D:\Ecommerce_project\product-service\src\main\java\com\eflipkartlite\productservice\exception\GlobalExceptionHandler.java
+D:\Ecommerce_project\product-service\src\main\java\com\eflipkartlite\productservice\exception\BusinessException.java

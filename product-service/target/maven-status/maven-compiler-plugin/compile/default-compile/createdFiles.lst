@@ -1,0 +1,16 @@
+com\eflipkartlite\productservice\config\SecurityConfig.class
+com\eflipkartlite\productservice\dto\ProductCreateRequest.class
+com\eflipkartlite\productservice\ProductServiceApplication.class
+com\eflipkartlite\productservice\exception\BusinessException.class
+com\eflipkartlite\productservice\config\CacheConfig.class
+com\eflipkartlite\productservice\dto\PriceUpdateRequest.class
+com\eflipkartlite\productservice\dto\QuantityUpdateRequest.class
+com\eflipkartlite\productservice\config\CacheConfig$2.class
+com\eflipkartlite\productservice\entity\Product.class
+com\eflipkartlite\productservice\dto\MessageResponse.class
+com\eflipkartlite\productservice\dto\ProductResponse.class
+com\eflipkartlite\productservice\config\CacheConfig$1.class
+com\eflipkartlite\productservice\controller\ProductController.class
+com\eflipkartlite\productservice\exception\GlobalExceptionHandler.class
+com\eflipkartlite\productservice\service\ProductService.class
+com\eflipkartlite\productservice\repository\ProductRepository.class
